@@ -4,6 +4,6 @@ import { Follow } from '../entities/follow.entity';
 
 @ObjectType()
 export class FollowingFriendsOutput extends CoreOutput {
-	@Field(type => [Follow])
-	followingFriends?: Follow[];
+  @Field((type) => [Follow])
+  followingFriends?: Follow[];
 }

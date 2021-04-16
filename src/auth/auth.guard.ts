@@ -1,10 +1,28 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
+import { JwtService } from 'src/jwt/jwt.service';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  canActivate(context: ExecutionContext): boolean {
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly usersService: UsersService,
+  ) {}
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const gqlContext = GqlExecutionContext.create(context).getContext();
-    return true;
+    const token = gqlContext.token;
+    if (token) {
+      const decoded = await this.jwtService.verify(token.toString());
+      if (typeof decoded === 'object' && decoded.hasOwnProperty('id')) {
+        const { user } = await this.usersService.findById(decoded['id']);
+        if (user) {
+          gqlContext['user'] = user;
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
