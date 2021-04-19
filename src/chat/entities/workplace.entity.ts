@@ -18,7 +18,7 @@ export class Workplace extends CoreEntity {
 
   @Field(() => [Channel], { nullable: true })
   @OneToMany(() => Channel, (channel) => channel.workplace, {
-    nullable: true,
+    nullable: true
   })
   channels: Channel[];
 

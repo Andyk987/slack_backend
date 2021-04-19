@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, UseGuards } from '@nestjs/common';
 import {
   ConnectedSocket,
   MessageBody,
@@ -11,14 +11,15 @@ import {
   WsResponse,
 } from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io';
-import { CREATE_CHANNEL } from './chat.constants';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { CREATE_CHANNEL, LEAVE_CHANNEL } from './chat.constants';
 import { ChatService } from './chat.service';
 import { CreateChannelInput } from './dtos/create-channel.dto';
 
 @WebSocketGateway()
 export class ChatGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  constructor(private readonly chatService: ChatService) {}
+  constructor(private readonly chatService: ChatService) { }
 
   private readonly logger = new Logger('ChatGateway');
 
@@ -37,6 +38,7 @@ export class ChatGateway
     this.logger.log(`Client Disconnected: ${client.id}`);
   }
 
+  @UseGuards(AuthGuard)
   @SubscribeMessage(CREATE_CHANNEL)
   async createChannel(
     @MessageBody() data: CreateChannelInput,
@@ -49,6 +51,12 @@ export class ChatGateway
     }
     return true;
   }
+
+  @UseGuards(AuthGuard)
+  @SubscribeMessage(LEAVE_CHANNEL)
+  async leave_channel(
+
+  ) { }
 
   @SubscribeMessage('chat')
   handleChat(

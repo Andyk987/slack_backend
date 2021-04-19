@@ -21,6 +21,12 @@ export class ChatService {
     private readonly channel: Repository<Channel>,
   ) {}
 
+  async allWorkplace() {
+    const workplace = await this.workplace.find();
+    console.log(workplace);
+    return workplace;
+  }
+
   async createWorkplace({
     title,
     avatarUrl,
@@ -53,8 +59,16 @@ export class ChatService {
   async createChannel({
     title,
     info,
+    workplaceId,
   }: CreateChannelInput): Promise<CreateChannelOutput> {
     try {
+      const workplace = await this.workplace.findOne(workplaceId);
+      if(!workplace) {
+        return {
+          ok: false,
+          error: "You're not belong to workplace currently",
+        }
+      }
       const nonSpecialChars = /^(?=[^_])([\w가-힣 ])([\w가-힣 ]?)*(?=[\w가-힣])([^_])$/g;
       if (!nonSpecialChars.test(title)) {
         return {
@@ -76,6 +90,7 @@ export class ChatService {
         this.channel.create({
           title: channelTitle,
           info,
+          workplace
         }),
       );
       return {

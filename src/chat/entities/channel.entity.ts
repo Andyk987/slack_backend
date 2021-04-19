@@ -1,7 +1,7 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, RelationId } from 'typeorm';
 import { Workplace } from './workplace.entity';
 
 @InputType('InfoInputType', { isAbstract: true })
@@ -33,4 +33,7 @@ export class Channel extends CoreEntity {
   @Field(() => Workplace)
   @ManyToOne(() => Workplace, (workplace) => workplace.channels)
   workplace: Workplace;
+
+  @RelationId((channel: Channel) => channel.workplace)
+  workplaceId: number;
 }

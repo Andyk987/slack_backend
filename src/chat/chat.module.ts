@@ -5,9 +5,13 @@ import { ChatService } from './chat.service';
 import { Workplace } from './entities/workplace.entity';
 import { Channel } from './entities/channel.entity';
 import { ChatResolver } from './chat.resolver';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Workplace, Channel])],
+  imports: [
+    TypeOrmModule.forFeature([Workplace, Channel]),
+    UsersModule
+  ],
   providers: [ChatGateway, ChatService, ChatResolver],
 })
-export class ChatModule {}
+export class ChatModule { }

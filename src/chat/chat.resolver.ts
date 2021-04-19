@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ChatService } from './chat.service';
 import {
   CreateChannelInput,
@@ -13,6 +13,11 @@ import { Workplace } from './entities/workplace.entity';
 @Resolver(() => Workplace)
 export class ChatResolver {
   constructor(private readonly chatService: ChatService) {}
+
+  @Query(() => [Workplace])
+  async allWorkplace() {
+    return this.chatService.allWorkplace();
+  }
 
   @Mutation(() => CreateWorkplaceOutput)
   async createWorkplace(

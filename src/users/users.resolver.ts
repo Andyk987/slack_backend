@@ -53,6 +53,7 @@ export class UsersResolver {
     return this.usersService.login(loginInput);
   }
 
+  @UseGuards(AuthGuard)
   @Mutation(() => EditPersonalProfileOutput)
   async editPersonalProfile(
     @AuthUser() authUser: User,
@@ -64,6 +65,7 @@ export class UsersResolver {
     );
   }
 
+  @UseGuards(AuthGuard)
   @Mutation(() => EditPrivateProfileOutput)
   async editPrivateProfile(
     @AuthUser() authUser: User,

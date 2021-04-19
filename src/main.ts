@@ -6,9 +6,5 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   await app.listen(3000);
-
-  app.enableCors({ origin: true });
-  app.useStaticAssets(join(__dirname, '..', 'client'));
-  app.setViewEngine('hbs');
 }
 bootstrap();
