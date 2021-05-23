@@ -38,7 +38,10 @@ export class UsersService {
 
   async findById(id: number): Promise<UserProfileOutput> {
     try {
-      const user = await this.users.findOneOrFail({ id });
+      const user = await this.users.findOneOrFail(
+        { id },
+        { relations: ['joined_channels'] },
+      );
       return { ok: true, user };
     } catch (error) {
       return { ok: false, error: 'User Not Found' };

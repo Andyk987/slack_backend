@@ -6,11 +6,11 @@ import { User } from './user.entity';
 @ObjectType()
 @Entity()
 export class Follow extends CoreEntity {
-  @Field((type) => User, { nullable: true })
-  @ManyToOne((type) => User, (user) => user.following)
+  @Field(() => User, { nullable: true })
+  @ManyToOne(() => User, (user) => user.following, { onDelete: 'CASCADE' })
   following: User;
 
-  @Field((type) => User)
-  @ManyToOne((type) => User, (user) => user.followers)
+  @Field(() => User)
+  @ManyToOne(() => User, (user) => user.followers, { onDelete: 'CASCADE' })
   follower: User;
 }

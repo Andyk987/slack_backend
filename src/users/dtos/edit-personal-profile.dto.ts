@@ -4,8 +4,7 @@ import { User } from '../entities/user.entity';
 
 @InputType()
 export class EditPersonalProfileInput extends PickType(User, [
-  'firstName',
-  'lastName',
+  'name',
   'gender',
   'country',
   'address',
