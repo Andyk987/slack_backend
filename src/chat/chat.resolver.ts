@@ -9,27 +9,27 @@ import {
   CreateChannelOutput,
 } from './dtos/create-channel.dto';
 import {
-  CreateWorkplaceInput,
-  CreateWorkplaceOutput,
-} from './dtos/create-workplace.dto';
-import { Workplace } from './entities/workplace.entity';
+  CreateWorkspaceInput,
+  CreateWorkSpaceOutput,
+} from './dtos/create-workspace.dto';
+import { Workspace } from './entities/workspace.entity';
 
-@Resolver(() => Workplace)
+@Resolver(() => Workspace)
 export class ChatResolver {
   constructor(private readonly chatService: ChatService) {}
 
-  @Query(() => [Workplace])
+  @Query(() => [Workspace])
   async allWorkplace() {
-    return this.chatService.allWorkplace();
+    return this.chatService.allWorkspace();
   }
 
   @UseGuards(AuthGuard)
-  @Mutation(() => CreateWorkplaceOutput)
-  async createWorkplace(
+  @Mutation(() => CreateWorkSpaceOutput)
+  async createWorkspace(
     @AuthUser() authUser: User,
-    @Args('input') createWorkplaceInput: CreateWorkplaceInput,
+    @Args('input') createWorkspace: CreateWorkspaceInput,
   ) {
-    return this.chatService.createWorkplace(authUser, createWorkplaceInput);
+    return this.chatService.createWorkspace(authUser, createWorkspace);
   }
 
   @Mutation(() => CreateChannelOutput)

@@ -5,7 +5,7 @@ import { Channel } from '../entities/channel.entity';
 @InputType()
 export class CreateChannelInput extends PickType(Channel, ['title', 'info']) {
   @Field(() => Int)
-  workplaceId: number;
+  workspaceId: number;
 }
 
 @ObjectType()

@@ -8,7 +8,7 @@ import { Channel } from './channel.entity';
 @InputType({ isAbstract: true })
 @ObjectType()
 @Entity()
-export class Workplace extends CoreEntity {
+export class Workspace extends CoreEntity {
   @Column()
   @Field(() => String)
   @IsString({ message: 'not string' })
@@ -19,7 +19,7 @@ export class Workplace extends CoreEntity {
   avatarUrl?: string;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.myWorkplaces, {
+  @ManyToOne(() => User, (user) => user.my_workspaces, {
     onDelete: 'CASCADE',
   })
   creator: User;
@@ -31,7 +31,7 @@ export class Workplace extends CoreEntity {
   members: User[];
 
   @Field(() => [Channel], { nullable: true })
-  @OneToMany(() => Channel, (channel) => channel.workplace, {
+  @OneToMany(() => Channel, (channel) => channel.workspace, {
     nullable: true,
     eager: true,
   })

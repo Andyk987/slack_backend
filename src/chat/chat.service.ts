@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Workplace } from './entities/workplace.entity';
+import { Workspace } from './entities/workspace.entity';
 import { Channel } from './entities/channel.entity';
 import {
-  CreateWorkplaceInput,
-  CreateWorkplaceOutput,
-} from './dtos/create-workplace.dto';
+  CreateWorkspaceInput,
+  CreateWorkSpaceOutput,
+} from './dtos/create-workspace.dto';
 import {
   CreateChannelInput,
   CreateChannelOutput,
@@ -18,37 +18,37 @@ import { LeaveChannelOutput } from './dtos/leave-channel.dto';
 @Injectable()
 export class ChatService {
   constructor(
-    @InjectRepository(Workplace)
-    private readonly workplaces: Repository<Workplace>,
+    @InjectRepository(Workspace)
+    private readonly workspaces: Repository<Workspace>,
     @InjectRepository(Channel)
     private readonly channels: Repository<Channel>,
     @InjectRepository(User)
     private readonly users: Repository<User>,
   ) {}
 
-  async allWorkplace() {
-    const workplace = await this.workplaces.find();
+  async allWorkspace() {
+    const workplace = await this.workspaces.find();
     return workplace;
   }
 
-  async createWorkplace(
+  async createWorkspace(
     creator: User,
-    { title, avatarUrl }: CreateWorkplaceInput,
-  ): Promise<CreateWorkplaceOutput> {
+    { title, avatarUrl }: CreateWorkspaceInput,
+  ): Promise<CreateWorkSpaceOutput> {
     try {
-      const isWorkplaceExist = await this.workplaces.findOne({ title });
-      if (isWorkplaceExist) {
+      const isWorkSpaceExist = await this.workspaces.findOne({ title });
+      if (isWorkSpaceExist) {
         return {
           ok: false,
           error: 'This name is already in use',
         };
       }
-      const newWorkplace = this.workplaces.create({
+      const newWorkspace = this.workspaces.create({
         title,
         avatarUrl,
         creator,
       });
-      await this.workplaces.save(newWorkplace);
+      await this.workspaces.save(newWorkspace);
       return {
         ok: true,
       };
@@ -63,11 +63,11 @@ export class ChatService {
   async createChannel({
     title,
     info,
-    workplaceId,
+    workspaceId,
   }: CreateChannelInput): Promise<CreateChannelOutput> {
     try {
-      const workplace = await this.workplaces.findOne(workplaceId);
-      if (!workplace) {
+      const workspace = await this.workspaces.findOne(workspaceId);
+      if (!workspace) {
         return {
           ok: false,
           error: "You're not belong to workplace currently",
@@ -94,7 +94,7 @@ export class ChatService {
         this.channels.create({
           title: titleFormat,
           info,
-          workplace,
+          workspace,
         }),
       );
       return {

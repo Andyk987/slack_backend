@@ -2,7 +2,7 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToMany, ManyToOne, RelationId } from 'typeorm';
-import { Workplace } from './workplace.entity';
+import { Workspace } from './workspace.entity';
 
 @InputType('InfoInputType', { isAbstract: true })
 @ObjectType()
@@ -27,7 +27,7 @@ export class Channel extends CoreEntity {
   info?: Info;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.myChannels, {
+  @ManyToOne(() => User, (user) => user.my_channels, {
     onDelete: 'CASCADE',
   })
   creator: User;
@@ -38,12 +38,12 @@ export class Channel extends CoreEntity {
   })
   members: User[];
 
-  @Field(() => Workplace)
-  @ManyToOne(() => Workplace, (workplace) => workplace.channels, {
+  @Field(() => Workspace)
+  @ManyToOne(() => Workspace, (workspace) => workspace.channels, {
     onDelete: 'CASCADE',
   })
-  workplace: Workplace;
+  workspace: Workspace;
 
-  @RelationId((channel: Channel) => channel.workplace)
-  workplaceId: number;
+  @RelationId((channel: Channel) => channel.workspace)
+  workspaceId: number;
 }

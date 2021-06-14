@@ -15,7 +15,7 @@ import {
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { Follow } from './follow.entity';
 import { Channel } from 'src/chat/entities/channel.entity';
-import { Workplace } from 'src/chat/entities/workplace.entity';
+import { Workspace } from 'src/chat/entities/workspace.entity';
 
 export enum Gender {
   MALE,
@@ -68,7 +68,7 @@ export class User extends CoreEntity {
 
   @Field(() => [Channel])
   @OneToMany(() => Channel, (channel) => channel.creator)
-  myChannels: Channel[];
+  my_channels: Channel[];
 
   @Field(() => [Channel])
   @ManyToMany(() => Channel, (channel) => channel.members, {
@@ -77,15 +77,15 @@ export class User extends CoreEntity {
   @JoinTable()
   joined_channels: Channel[];
 
-  @Field(() => [Workplace], { nullable: true })
-  @OneToMany(() => Workplace, (workplace) => workplace.creator, {
+  @Field(() => [Workspace], { nullable: true })
+  @OneToMany(() => Workspace, (workplace) => workplace.creator, {
     nullable: true,
   })
-  myWorkplaces: Workplace[];
+  my_workspaces: Workspace[];
 
-  @Field(() => Workplace)
-  @ManyToOne(() => Workplace, (workplace) => workplace.members, {
+  @Field(() => Workspace)
+  @ManyToOne(() => Workspace, (workspace) => workspace.members, {
     onDelete: 'CASCADE',
   })
-  joined_workspaces: Workplace;
+  joined_workspaces: Workspace;
 }
