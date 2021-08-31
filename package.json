@@ -1,0 +1,112 @@
+{
+  "name": "slack_backend",
+  "version": "0.0.1",
+  "description": "<p align=\"center\">   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo_text.svg\" width=\"320\" alt=\"Nest Logo\" /></a> </p>",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "start": "cross-env NODE_ENV=prod nest start",
+    "start:dev": "cross-env NODE_ENV=dev nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^7.6.13",
+    "@nestjs/config": "^0.6.3",
+    "@nestjs/core": "^7.6.13",
+    "@nestjs/graphql": "^7.9.11",
+    "@nestjs/platform-express": "^7.6.13",
+    "@nestjs/platform-socket.io": "^7.6.15",
+    "@nestjs/serve-static": "^2.1.4",
+    "@nestjs/typeorm": "^7.1.5",
+    "@nestjs/websockets": "^7.6.15",
+    "@types/crypto-js": "^4.0.1",
+    "@types/lodash": "^4.14.172",
+    "apollo-server-express": "^2.21.0",
+    "bcrypt": "^5.0.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "crypto-js": "^4.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-tools": "^7.0.4",
+    "hbs": "^4.1.1",
+    "install": "^0.13.0",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "npm": "^7.8.0",
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^6.6.6",
+    "socket.io": "^4.0.1",
+    "typeorm": "^0.2.37"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^7.5.6",
+    "@nestjs/schematics": "^7.2.7",
+    "@nestjs/testing": "^7.6.13",
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.31",
+    "@types/socket.io": "^2.1.13",
+    "@types/supertest": "^2.0.10",
+    "@types/ws": "^7.4.1",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "supertest": "^6.1.3",
+    "ts-jest": "^26.5.3",
+    "ts-loader": "^8.0.17",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andyk987/slack_backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Andyk987/slack_backend/issues"
+  },
+  "homepage": "https://github.com/Andyk987/slack_backend#readme"
+}
